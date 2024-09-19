@@ -14,7 +14,7 @@ public class Review {
     @Schema(example = "foo")
     private String comment;
 
-    // Getters and Setters
+
     public LocalDateTime getDate() {
         return date;
     }

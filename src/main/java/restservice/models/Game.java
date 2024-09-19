@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Game {
 
+
     @NotNull
     @Schema(description = "Unique identifier. Always in lower case and snake case", example = "watch_dogs")
     private String id;

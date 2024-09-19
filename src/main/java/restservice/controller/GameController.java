@@ -23,7 +23,12 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    // UPDATE GAME
+    /**
+     * Updates an existing game
+     *
+     * @param game the game to update
+     * @return updated game
+     */
     @PutMapping
     @Operation(summary = "Update an existing game", description = "Update an existing game by Id")
     @ApiResponses(value = {
@@ -41,7 +46,12 @@ public class GameController {
         return ResponseEntity.ok(updatedGame);
     }
 
-    // ADD GAME
+    /**
+     * Add new game
+     *
+     * @param game the game to add
+     * @return added game
+     */
     @PostMapping
     @Operation(summary = "Add a new game to the store", description = "Add a new game to the store")
     @ApiResponses(value = {
@@ -58,7 +68,12 @@ public class GameController {
         return ResponseEntity.ok(newGame);
     }
 
-    // FIND GAME BY TITLE
+    /**
+     * Finds games by tittle
+     *
+     * @param title the tittle to search for
+     * @return list of game matching tittle
+     */
     @GetMapping("/findByTitle")
     @Operation(summary = "Find games by status", description = "Search games by title")
 
@@ -77,14 +92,19 @@ public class GameController {
         return ResponseEntity.ok(games);
     }
 
-    // FIND GAME BY GENRE
+    /**
+     * Finds games by genre
+     *
+     * @param tags the genre to search for
+     * @return list of game matching genre
+     */
     @GetMapping("/findByGenre")
     @Operation(summary = "Find games by tags", description = "Search games by genre")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful operation",
                     content = {
-                    @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Game.class))}),
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = Game.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid tag value", content = @Content)
     })
     public ResponseEntity<List<Game>> findGamesByTags(
@@ -108,7 +128,12 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
-    // UPDATE GAME BY ID
+    /**
+     * Gets a game by its ID.
+     *
+     * @param id the ID of the game
+     * @return game with same ID, or null if not found
+     */
     @PostMapping("/{id}")
     @Operation(summary = "Update game in the store with form data")
     @ApiResponses(value = {
@@ -119,12 +144,17 @@ public class GameController {
         return ResponseEntity.ok().build();
     }
 
-    // DELETE GAME BY ID
+    /**
+     * Deletes a game by its ID.
+     *
+     * @param id the ID of the game to delete
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a game", description = "Deletes a game from the store")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "400", description = "Invalid game value")
     })
+
     public ResponseEntity<Void> deleteGame(
             @PathVariable @Parameter(description = "Game id to delete") String id) {
         gameService.deleteGame(id);
